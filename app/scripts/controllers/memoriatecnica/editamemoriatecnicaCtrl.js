@@ -8,7 +8,7 @@ angular
         .database()
         .ref()
         .child('messages');
-
+///crea variables y les asigna datos  
       function GetdataFire() {
         var defered = $q.defer();
         var promise = defered.promise;
@@ -24,7 +24,7 @@ angular
         });
         return promise;
       }
-
+///elimina datos 
       function deleteFile(index) {
         var defered = $q.defer();
         var promise = defered.promise;
@@ -40,7 +40,7 @@ angular
         return promise;
 
       }
-
+///funcion de inicializacion del controlador, obtiene toda la informacion relacionada con la memoria tecnica 
       function initialData() {
 
 
@@ -159,7 +159,7 @@ angular
         });
       }
 
-
+///obtiene la informacion de varios aparatos 
       function getApartos(modem, radio, router, antena, ups, idtecnico) {
         if (vm.OrdenInstalacion) {
           memoriaFactory.GetAparatosTecnico(1, vm.numeroorden, idtecnico, vm.IdMemoriaTecnica).then(function (aparatos) {
@@ -266,7 +266,7 @@ angular
         }
       }
 
-
+///obtiene la informacion de los tecnicos y llama a la funcion getApartos
       function getTecnicos(id, idtecnico, Modem, Radio, Router, Antena, UPS) {
         memoriaFactory.GetTecnicosMemoriaTecnica(id, 'M', vm.IdMemoriaTecnica).then(function (tecnicos) {
           vm.listTecnicos = tecnicos.GetTecnicosMemoriaTecnicaResult;
@@ -278,7 +278,7 @@ angular
           getApartos(Modem, Radio, Router, Antena, UPS, idtecnico);
         });
       }
-
+///obtiene la informacion y la almacena en una variable para despues agregarla a las notas 
       function guardaNota() {
         var obj = {};
         obj.Observacion = vm.detallenota;
@@ -288,7 +288,7 @@ angular
         obj.Nombre = $localStorage.currentUser.nombre;
         vm.notas.push(obj);
       }
-
+///verifica el numero de serie de los aparatos 
       function validaAparatodig(serie) {
         var count = 0;
         vm.aparatosdigitales.forEach(function (item) {
@@ -297,7 +297,7 @@ angular
         return (count > 0) ? true : false;
       }
 
-
+///primero verifica el nuemro de serie de los aparatos, valida el limite de aparatos y si es todo valido llama guarda el apatato 
       function addAparatodig() {
 
         if (vm.aparatosdigitales.length + 1 <= vm.NoSTB) {
@@ -334,7 +334,7 @@ angular
 
             } */
 
-
+///elimina las imagenes 
       function BorraImagen(index) {
         if (index > -1) {
           var obj = vm.Lista_evidencias[index];
@@ -344,7 +344,7 @@ angular
           vm.Lista_evidencias.splice(index, 1);
         }
       }
-
+///elimina las imagenesVS
       function BorraImagenVS(index) {
         if (index > -1) {
           var obj = vm.Lista_evidenciasVS[index];
@@ -354,7 +354,7 @@ angular
           vm.Lista_evidenciasVS.splice(index, 1);
         }
       }
-
+///elimina un aparato 
 
       function eliminaaparato(index) {
         if (index > -1) {
@@ -368,7 +368,7 @@ angular
           }
         }
       }
-
+///elimina un aparato digital
       function eliminaaparatodig(index) {
         if (index > -1) {
           var obj = vm.aparatosdigitales[index];
@@ -382,7 +382,7 @@ angular
         }
       }
 
-
+///hace validaciones para saber si se puede cambiar el aparato, si es que se puede, cambia la seriacion del aparato 
       function cambioAparato() {
         if (vm.AparatoAnterior && vm.EquipoSustituir && vm.AparatoNuevo) {
           if (vm.AparatoAnterior.Descripcion !== vm.AparatoNuevo.Descripcion) {
@@ -417,12 +417,12 @@ angular
         }
       }
 
-
+/// verifica que sea valido 
       function isvalid(value) {
         return (value !== undefined && value !== '' && value !== null) ? true : false;
       }
 
-
+///valida que toda la informacion sea correcta y este completa antes de poderla guardar, si todo esta bien la guarda 
       function guardar() {
         if ((vm.PersonaAtiendeSitio == undefined || vm.TelefonoAtiendeSitio == undefined || vm.CelularAtiendeSitio == undefined || vm.EmailAtiendeSitio == undefined) ||
           (vm.PersonaAtiendeSitio == '' || vm.TelefonoAtiendeSitio == '' || vm.CelularAtiendeSitio == '' || vm.EmailAtiendeSitio == '')) {
@@ -712,7 +712,7 @@ angular
         });
 
       }
-
+///obtiene los detalles, gran parte se muestra en la consola 
       function detalle(det) {
         console.log('detalle');
         vm.NoSTB = det.NoSTB;
@@ -848,7 +848,7 @@ angular
         getTecnicos(vm.contratocompania.split('-')[1], det.IdTecnico, det.Modem, det.Radio, det.Router, det.AntenaSerie, det.UPS);
         vm.titulo = 'Edición de memoria técnica de servicio #' + vm.IdMemoriaTecnica;
       }
-
+///se pregunta si estan seguros de obtener el folio, despues lo genera  
       function obtenfolio() {
         if (vm.generafolio) {
           //Preguntamos si están seguros de generar folio
@@ -894,7 +894,7 @@ angular
           });
         }
       }
-
+///asignacion de valores a elementos del vm
       function detalleTecnico() {
         vm.listModem = [];
         vm.listRadio = [];
@@ -913,13 +913,13 @@ angular
           Lightbox.openModal(vm.Lista_evidencias, index);
         };
 
-
+///hace un empalme con las notas
       function eliminaNota(index) {
         if (index > -1) {
           vm.notas.splice(index, 1);
         }
       }
-
+///valida que se puedan eliminar las memorias tecnicas y si es que se puede lo hace
       function EliminaMemoria() {
         var parametros = {};
         parametros.IdMemoriaTecnica = vm.IdMemoriaTecnica;
@@ -1059,6 +1059,7 @@ angular
       vm.uploader = new FileUploader({
         filters: [{
           name: "yourName1",
+          ///sirve para cargar imagenes 
           fn: function (item) {
             var count = 0;
             var count2 = 0;
@@ -1086,6 +1087,7 @@ angular
       vm.uploaderVS = new FileUploader({
         filters: [{
           name: "yourName1",
+          ///sirve para cargar imagenes 
           fn: function (item) {
             var count = 0;
             var count2 = 0;
@@ -1117,7 +1119,7 @@ angular
         fileItem._file.tipo = vm.tipoimagen.Nombre;
         fileItem.IdUsuario = $localStorage.currentUser.idUsuario;
       };
-
+///filtra la lista en base al tipo de aparato 
       function FiltrarLista(Lista, Titulo) {
         var modalInstance = $uibModal.open({
           animation: true,
@@ -1165,7 +1167,7 @@ angular
         fileItem._file.tipo = vm.tipoimagenValidacion.Nombre;
         fileItem.IdUsuario = $localStorage.currentUser.idUsuario;
       };
-
+///obtiene los datos de Hughes para actualizarlos donde se esten usando 
       function ActualizarDatosHughes() {
         var parametros = {};
         parametros.Clv_Orden = vm.numeroorden;

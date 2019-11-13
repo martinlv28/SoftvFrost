@@ -6,6 +6,7 @@ function UsuariosCtrl(usuarioFactory, rolFactory, $state, ngNotify) {
 	vm.EditaUsuario = EditaUsuario;
 	vm.Busca = Busca;
 
+///funcion de inicializacion del controlador, obtiene la lista de usuarios y de roles 
 	this.$onInit = function () {
 		usuarioFactory.getUsuarioList().then(function (data) {
 			vm.Usuarios = data.GetUsuarioListResult;		
@@ -14,14 +15,14 @@ function UsuariosCtrl(usuarioFactory, rolFactory, $state, ngNotify) {
 			vm.Roles = data.GetRoleListResult;
 		});
 	}
-
+///edita un usuario en espesifico 
 	function EditaUsuario(x) {
 		$state.go('home.provision.editausuario', {
 			obj: x
 		});
 	}
 
-
+///obtiene la lista de usuarios y si alguno es nulo lo llena con espacios en blanco 
 	function Busca(option) {
 
 		if (option == 1) {

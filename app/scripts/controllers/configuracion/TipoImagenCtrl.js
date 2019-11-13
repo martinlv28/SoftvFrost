@@ -2,14 +2,14 @@
 angular.module('softvFrostApp').controller('TipoImagenCtrl', TipoImagenCtrl);
 
 function TipoImagenCtrl(catalogosMemoriaFactory, $state, ngNotify) {
-
+///funcion de inicializacion del controlador, obtiene el listado de los tipos de imagenes 
   function Init() {
     vm.TiposEliminar = [];
     catalogosMemoriaFactory.GetObtieneTipoImagenesCatalogo().then(function (data) {
       vm.Tipos = data.GetObtieneTipoImagenesCatalogoResult;
     });
   }
-
+///valida que no haya un tipo de imagen con el mismo nombre, si no lo agrega a la lista
   function Agregar() {
     var tipoAux = {};
     var Agrega = true;
@@ -29,7 +29,7 @@ function TipoImagenCtrl(catalogosMemoriaFactory, $state, ngNotify) {
       vm.NombreNuevo = '';
     }
   }
-
+  ///valida que no se haya cargado una imagen de ese tipo, si la validacion lo permite elimina el tipo de imagen
   function ElimnarTipo(Tipo) {
     if (Tipo.IdTipo > 0 && Tipo.ExisteImagen == true) {
       ngNotify.set('Ya se ha cargado una imagen de este tipo, no se puede eliminar', 'warn');
@@ -47,7 +47,7 @@ function TipoImagenCtrl(catalogosMemoriaFactory, $state, ngNotify) {
       vm.Tipos.splice(indexEliminar, 1);
     }
   }
-
+///guarda  o actualiza el tipo de imagen 
   function Guardar() {
     var parametros = {};
     parametros.TiposImagenes = vm.Tipos;

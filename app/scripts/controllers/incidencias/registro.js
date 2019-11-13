@@ -1,6 +1,7 @@
 'use strict';
 
 function RegistroCtrl(ngNotify, incidenciasFactory, $state, $filter) {
+	///funcion de inicializacion del controlador,obtiene el listado de motivoticket, sintoma, tipocontacto y mediocomunicacion
 	function initial() {
 		incidenciasFactory.getMotivo().then(function(data) {
 			vm.motivo = data.GetMotivoTicketListResult;
@@ -15,7 +16,7 @@ function RegistroCtrl(ngNotify, incidenciasFactory, $state, $filter) {
 			vm.medioComun = data.GetMedioComunicacionListResult;
 		});
 	}
-
+///valida que todos los campos esten correctos, asigna lo obtenido con variables locales para despues añadir el ticket 
 	function guardar() {
 		if (vm.san == undefined) {
 			ngNotify.set('Inserte todos los campos para generar el ticket.', 'error');
@@ -44,7 +45,7 @@ function RegistroCtrl(ngNotify, incidenciasFactory, $state, $filter) {
 			});
 		}
 	}
-
+///obtiene los datos de la terminal
 	function getTerminal() {
 		if (vm.san == undefined || vm.san == '') {
 			ngNotify.set('Inserte número de terminal.', 'error');
