@@ -3,7 +3,7 @@ angular
 
   .module('softvFrostApp')
   .controller('EstadoTerminalesCtrl', function ($filter, $uibModal, terminalFactory, mapaBeamFactory, $rootScope, ngNotify) {
-
+///funcion de inicializacion del controlador, obtiene la lista de los beams
     function initialData() {
       mapaBeamFactory.GetBeamList().then(function (result) {
        
@@ -17,7 +17,7 @@ angular
         vm.Beams.push(objTodos);
       });
     }
-
+///obtiene los datos de los estados de la terminal y los grafica
     function graficar() {
    
       if (vm.beam === undefined) {

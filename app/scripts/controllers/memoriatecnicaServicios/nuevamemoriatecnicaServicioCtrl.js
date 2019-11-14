@@ -127,7 +127,7 @@ angular
         'Nombre': 'Antena Digital'
       },
     ];
-
+///funcion de inicializacion del controlador,obtiene un listado de todos los tipos de imagen, el tipo de servicio y el estatus 
     function initialData() {
       var fechaHoy = new Date();
       vm.fechasitio = $filter('date')(fechaHoy, 'dd/MM/yyyy');
@@ -154,7 +154,7 @@ angular
         });
       });
     }
-
+///asignacion de valores y llama a la funcion getTecnicos
     function getValidationdata(obj) {
       var results = obj;
       vm.celular = results.Celular;
@@ -188,7 +188,7 @@ angular
     }
 
 
-
+///valida el numero del reporte, llama a la funcion getValidationdata
     function validar() {
       memoriaServicioFactory.GetObtieneDatosPorOrden(vm.numeroqueja).then(function (result) {
         if (result.GetObtieneDatosPorQuejaResult.length > 0) {
@@ -267,13 +267,13 @@ angular
 
       ]
     });
-
+///valida la serie de los aparatos dijitales 
     function validaAparatodig(serie) {
       var count = 0;
       vm.aparatosdigitales.forEach(function (item) { count += (item.SerieAnterior === serie) ? 1 : 0; });
       return (count > 0) ? true : false;
     }
-
+///valida que no este agregado el aparato y el numero maximo de aparatos 
     function addAparatodig() {
 
       if (vm.aparatosdigitales.length + 1 <= vm.NoSTB) {
@@ -294,19 +294,19 @@ angular
         ngNotify.set('Solo tiene registrado ' + vm.NoSTB + ' como cantidad máxima de aparatos', 'warn');
       }
     }
-
+///revisa el index y enpalma en aparatos digitales 
     function eliminaaparatodig(index) {
       if (index > -1) {
         vm.aparatosdigitales.splice(index, 1);
       }
     }
-
+///revisa el index y enpalma en notas
     function eliminaNota(index) {
       if (index > -1) {
         vm.notas.splice(index, 1);
       }
     }
-
+///asignacion de valores 
     vm.uploader.onAfterAddingFile = function (fileItem) {
       fileItem.file.idtipo = vm.tipoimagen.IdTipo;
       fileItem.file.tipo = vm.tipoimagen.Nombre;
@@ -314,7 +314,7 @@ angular
       fileItem._file.tipo = vm.tipoimagen.Nombre;
       fileItem.IdUsuario = $localStorage.currentUser.idUsuario;
     };
-
+///asignacion de valores 
     vm.uploaderVS.onAfterAddingFile = function (fileItem) {
       fileItem.file.idtipo = vm.tipoimagenValidacion.IdTipo;
       fileItem.file.tipo = vm.tipoimagenValidacion.Nombre;
@@ -322,14 +322,14 @@ angular
       fileItem._file.tipo = vm.tipoimagenValidacion.Nombre;
       fileItem.IdUsuario = $localStorage.currentUser.idUsuario;
     };
-
+///obtiene a la lista de tecnicos 
     function getTecnicos(id) {
 
       memoriaServicioFactory.GetTecnicosMemoriaTecnica(id, 'N', 0).then(function (tecnicos) {
         vm.listTecnicos = tecnicos.GetTecnicosMemoriaTecnicaServicioResult;
       });
     }
-
+///asignacion de variables y llama a la funcion getAparatos
     function detalleTecnico() {
       vm.listModem = [];
       vm.listRadio = [];
@@ -341,7 +341,7 @@ angular
       vm.AparatosNuevo = [];
       getApartos();
     }
-
+///valida que este elegido el tecnico y si si trae la lista de aparatos actuales y  tecnicos 
     function getApartos() {
       if (vm.instalador == undefined) {
         ngNotify.set("Es necesario elegir un técnico", "error");
@@ -356,19 +356,19 @@ angular
       }
     }
 
-
+///revisa el index y enpalma en cambios
     function BorraImagen(index) {
       if (index > -1) {
         vm.cambios.splice(index, 1);
       }
     }
-
+///revisa el index y enpalma en cambios
     function eliminaaparato(index) {
       if (index > -1) {
         vm.cambios.splice(index, 1);
       }
     }
-
+///hace una serie de validaciones para poder cambiar el numero de serie 
     function cambioAparato() {
       if (vm.AparatoAnterior && vm.EquipoSustituir && vm.AparatoNuevo) {
         if (vm.AparatoAnterior.Descripcion !== vm.AparatoNuevo.Descripcion) {
@@ -403,11 +403,11 @@ angular
         ngNotify.set("Necesita completar todos los campos", "error");
       }
     }
-
+///devuelve si es valido 
     function isvalid(value) {
       return value !== undefined && value !== "" && value !== null ? true : false;
     }
-
+/// asignacion de valores 
     function guardaNota() {
       var obj = {};
       obj.Observacion = vm.detallenota;
@@ -418,7 +418,7 @@ angular
       vm.notas.push(obj);
       vm.detallenota = '';
     }
-
+///hace una serie de validacion para que toda la informacion sea correcta, y si es asi guarda
     function guardar() {
       if((vm.PersonaAtiendeSitio == undefined || vm.TelefonoAtiendeSitio == undefined || vm.CelularAtiendeSitio == undefined  || vm.EmailAtiendeSitio == undefined) ||
       (vm.PersonaAtiendeSitio == '' || vm.TelefonoAtiendeSitio == ''|| vm.CelularAtiendeSitio == ''  || vm.EmailAtiendeSitio == ''))
@@ -617,7 +617,7 @@ angular
 
       });
     }
-
+///obtiene los datos de hughes
     function ActualizarDatosHughes() {
       var parametros = {};
       parametros.Clv_Queja = vm.numeroqueja;

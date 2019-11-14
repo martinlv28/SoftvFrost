@@ -2,7 +2,7 @@
 
 angular.module('softvFrostApp')
   .controller('ValidationCtrl', function (NgMap, OVTFactory, $uibModal,mapaBeamFactory, ngNotify, diagnosticFactory,terminalFactory,globalService) {
-
+///valida si se tiene acceso a la informacion, si es que lo tiene accede a toda la informacion 
     function validate() {
       terminalFactory.GetValidaSANUsuario(vm.SAN).then(function(data){
         if(data.GetValidaSANUsuarioResult===true){
@@ -72,7 +72,7 @@ angular.module('softvFrostApp')
      
       
     }
-
+///rellena de ceros a la izquierda y regresa el tipo del globalService mas la cadena que se le pusierton ceros 
     function hughesGetSanCompuesto(obj) {
       var a = obj.toString();
       var i;
@@ -81,7 +81,7 @@ angular.module('softvFrostApp')
       }
       return globalService.getType() + a;
     };
-
+///hace una llamada a un ping 
     function getPing() {
       var obj = {};
       obj.token = vm.OVTToken;
@@ -95,7 +95,7 @@ angular.module('softvFrostApp')
 
       });
     }
-
+///actualiza la configuracion 
     function getRefresh() {
       var obj = {};
       obj.token = vm.OVTToken;
@@ -109,7 +109,7 @@ angular.module('softvFrostApp')
     }
 
 
-
+///abre la vista SignOff
     function abrirSignOff() {
    
       var modalInstance = $uibModal.open({
@@ -131,7 +131,7 @@ angular.module('softvFrostApp')
     }
 
 
-
+///valida que toda la informacione sea correcta 
     function Procced() {
       if (vm.antenna === undefined || vm.mount === undefined) {
         ngNotify.set('Complete step two and step three.', 'error');
@@ -212,7 +212,7 @@ angular.module('softvFrostApp')
         });
       }
     }
-
+///obtiene el estado actual 
     function GetCurrentStats() {
       var objv = {};
       objv.token = vm.OVTToken;
@@ -226,7 +226,7 @@ angular.module('softvFrostApp')
         vm.RecomendedDiag = vm.DetailsOVT2.diagnosis.recommendedAction.name;
       });
     }
-
+///revisa si se efectuo el método del rango de fuerza
     function ForceRange() {
       var objv = {};
       objv.token = vm.OVTToken;
@@ -246,7 +246,7 @@ angular.module('softvFrostApp')
         }
       });
     }
-
+///revisa si se efectuo el método de limpiesa de estados 
     function ClearTerminal() {
       var objv = {};
       objv.token = vm.OVTToken;
@@ -268,7 +268,7 @@ angular.module('softvFrostApp')
 
       });
     }
-
+///revisa si se efectuo el método de recarga de tamblas
     function ReloadTables() {
       var objv = {};
       objv.token = vm.OVTToken;
@@ -290,7 +290,7 @@ angular.module('softvFrostApp')
 
 
     }
-
+///revisa si se efectuo el método de retroceso forzoso 
     function ForceFallBack() {
       var objv = {};
       objv.token = vm.OVTToken;
@@ -310,7 +310,7 @@ angular.module('softvFrostApp')
 
       });
     }
-
+///revisa si se efectuo el método de reinicio 
     function Reboot() {
       var objv = {};
       objv.token = vm.OVTToken;
@@ -330,7 +330,7 @@ angular.module('softvFrostApp')
 
       });
     }
-
+///revisa si se efectuo el método de completar accion 
     function CompleteAction() {
       var objv = {};
       objv.token = vm.OVTToken;

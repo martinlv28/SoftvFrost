@@ -2,6 +2,8 @@
 angular
   .module('softvFrostApp')
   .controller('AtencionNuevaCtrl', function ($uibModal, atencionFactory, ngNotify, $rootScope, $state, $stateParams, $filter) {
+    ///funcion de inicializacion del controlador, llama a la funcion del serviciosNuevo de atencionFactory
+    ///asignacion de valores y llama a otras dos funciones 
     function initialData() {
 
       atencionFactory.serviciosNuevo().then(function (data) {
@@ -11,36 +13,37 @@ angular
         GetClasificacionProblemas();
       });
     }
-
+///llama a la funcion del GetClasificacionProblemas de atencionFactory que obtiene la clasificacion de los problemas 
     function GetClasificacionProblemas() {
       atencionFactory.GetClasificacionProblemas().then(function (data) {
         vm.clasificacionProblemas = data.GetuspConsultaTblClasificacionProblemasListResult;
       });
     }
-
+///llama a la funcion del getclasificacionQuejas de atencionFactory que obtiene la clasificacion de las quejas 
     function GetclasificacionQuejas() {
       atencionFactory.getclasificacionQuejas().then(function (data) {
         vm.Departamentos = data.GetMUESTRACLASIFICACIONQUEJASListResult;
       });
     }
+///llama a la funcion del GetprioridadQueja de atencionFactory que obtiene la prioridad de las quejas  
 
     function GetprioridadQueja() {
       atencionFactory.GetprioridadQueja().then(function (data) {
         vm.Prioridades = data.GetSoftv_GetPrioridadQuejaListResult;
       });
     }
-
+///llama a la funcion del MuestraTrabajos de atencionFactory que obtiene los trabajos
     function MuestraTrabajos(tipo) {
       atencionFactory.MuestraTrabajos(tipo).then(function (data) {
         vm.Trabajos = data.GetMUESTRATRABAJOSQUEJASListResult;
       });
     }
-
+///llama a la funciones Limpia informacion y MuestraTrabajos 
     function CambioServicio(servicio) {
       LimpiaInformacion();
       MuestraTrabajos(servicio.Clv_TipSerPrincipal);
     }
-
+///verifica si se puede obtener la informacion de pago del cliente , si puede llama a la vista modalTickets.html
     function abrirPagos() {
       if (vm.GlobalContrato == null) {
         ngNotify.set('Establezca el contrato del cliente para obtener la información', 'error');
@@ -64,7 +67,7 @@ angular
       });
     }
 
-
+///verifica si se puede obtener la informacion de detalle del cobro del cliente , si puede llama a la vista ModalDetalleCobro.html
     function abrirDetalleCobro() {
       if (vm.GlobalContrato == null) {
         ngNotify.set('Establezca el contrato del cliente para obtener la información', 'error');
@@ -87,7 +90,7 @@ angular
         }
       });
     }
-
+///hace asignaciones de valores y despues llama a la vista ModalAgenda.html
     function abrirAgenda() {
       var options = {};
       options.Contrato = vm.GlobalContrato;
@@ -116,7 +119,7 @@ angular
         }
       });
     }
-
+///llama a otra vista: ModalBuscaCliente.html
     function ModalClientes() {
       var options = {};
       options.CLV_TIPSER = vm.selectedServicio.Clv_TipSerPrincipal;
@@ -138,7 +141,7 @@ angular
       });
     }
 
-
+///en base a una validacion llama a una funcion o a otra funcion 
     function abrirBusquedaCliente() {
       if (vm.GlobalContrato != null) {
         PreguntaAtencion(2);
@@ -146,7 +149,7 @@ angular
         ModalClientes();
       }
     }
-
+///llama a otra vista: ModalPreguntaAtencion.html
     function PreguntaAtencion(opcion) {
       var detalle = {};
       detalle.Modulo = 'Atencion';
@@ -169,7 +172,7 @@ angular
         }
       });
     }
-
+///llama a la vista: ModalStatusCliente.html
     function muestraModalStatus(status) {
       var modalInstance = $uibModal.open({
         animation: vm.animationsEnabled,
@@ -190,7 +193,7 @@ angular
 
     }
 
-
+///verifica si el contrato no es nulo, si no lo es llama a la vista modalReportes.html
     function openHistorial() {
       if (vm.GlobalContrato == null) {
         ngNotify.set('Establezca el contrato del cliente para obtener la información', 'error');
@@ -214,7 +217,7 @@ angular
       });
     }
 
-
+///deja en blanco los campos de la paguina 
     function LimpiaInformacion() {
       vm.NombreCliente = '';
       vm.Calle = '';
@@ -236,7 +239,7 @@ angular
       vm.Hora = $filter('date')(new Date(), 'HH:mm:ss');
     }
 
-
+///varifica si se puede añadir una llamada, llama a varias funciones contenidas en atencionFactory
     function AddLLamadasdeInternet(showDetails) {
       var atencion = (vm.tipoAtencion == 'S') ? 'S' : 'T';
       var trabajo = (vm.Trabajo == undefined) ? 0 : vm.Trabajo.CLV_TRABAJO;
@@ -302,12 +305,12 @@ angular
       vm.Trabajo = vm.Trabajo[0];
       vm.DescripcionSolucion = "";
     })
-
+///cambia el valor de una variable y asigna un mensaje 
     function MuestraMensajeQueja() {
       vm.MuestraMensajeQueja = true;
       vm.MensajeQueja = "El cliente cuenta con un Reporte pendiente"
     }
-
+///verifica si se coloco un contrato valido, y obtiene la informacion del contrato 
     function DetalleContrato() {
 
 
@@ -386,7 +389,7 @@ angular
       });
 
     }
-
+///detecta la precencia de un enter y hace validaciones para la accion del enter 
     function EnterContrato(event) {
       if (event.keyCode == 13) {
         if (vm.selectedServicio == null) {
@@ -418,7 +421,7 @@ angular
 
 
 
-
+///hace validaciones depende de ellas lanza una notificacion, despues llama a la funcion AddLLamadasdeInternet
     function GuardarLlamada() {
       if (vm.GlobalContrato == null) {
         ngNotify.set('Establezca el contrato del cliente para generar un reporte.', 'error');
@@ -435,7 +438,7 @@ angular
 
       AddLLamadasdeInternet(true);
     }
-
+///hace validaciones depende de ellas lanza una notificacion, despues hace asignaciones y despues llama a varias funciones 
     function generaReporte() {
 
       if (vm.GlobalContrato === null) {
@@ -458,14 +461,14 @@ angular
       AddLLamadasdeInternet(false);
 
     }
-
+///llama a la funcion ConsultaLLamada contenida en atencionFactory 
     function DetalleLlamada(llamada) {
 
       atencionFactory.ConsultaLLamada(llamada).then(function (data) {
 
       });
     }
-
+///llama a la funcion ValidaOrdenQuejas contenida en atencionFactory 
     function ValidaOrdenQuejas() {
       atencionFactory.ValidaOrdenQuejas(vm.GlobalContrato, vm.selectedServicio.Clv_TipSerPrincipal)
         .then(function (data) {
@@ -477,7 +480,7 @@ angular
           }
         });
     }
-
+///lanza un mensaje
     function CancelaReporte() {
       $state.go('home.procesos.atencion');
       ngNotify.set('Se ha guardado la llamada, número de atención telefónica #' + vm.NumeroLlamada, {
