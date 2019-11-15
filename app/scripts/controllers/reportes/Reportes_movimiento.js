@@ -14,7 +14,7 @@ angular.module('softvFrostApp')
         vm.csvDosHide = true;
         var img = new Image();
         img.crossOrigin = "";
-
+///funcion de inicializacion del controlador, llama a getComandoList y llama a varias funciones 
         this.$onInit = function () {
             terminalFactory.getComandoList().then(function (data) {
                 vm.Comandos = data.GetComandoListResult;
@@ -24,7 +24,7 @@ angular.module('softvFrostApp')
                 obtieneIndex("Cancelar Movimiento");
             });
         }
-
+///verifica la cadena y si cumple, hace ina asignacion y despues hace un empalme en comandos 
         function obtieneIndex(cadena) {
             var indexAux = 0;
             vm.Comandos.forEach(function (item, index) {
@@ -34,20 +34,21 @@ angular.module('softvFrostApp')
             });
             vm.Comandos.splice(indexAux, 1);
         }
-
+///Actualiza 
         function reloadRoute() {
             $state.reload();
         };
 
 
         vm.limpiarFiltros = limpiarFiltros;
+        ///limpia las fechas y llama a la fucnion reloadRoute
         function limpiarFiltros() {
             vm.fechaInicio = null;
             vm.fechaFin = null;
             reloadRoute();
         }
 
-
+        ///obtiene la imagen en un url
         function getImageDataURL() {
 
             var url = document.getElementById("pdflogoimage").src;
@@ -71,6 +72,7 @@ angular.module('softvFrostApp')
 
         var arrayMovi = [];
         vm.getReporteMovimientos = getReporteMovimientos;
+        ///verifica todos los filtros para despues llamar a la funcion mostrarReporteMovimientos con los filtros aplicados 
         function getReporteMovimientos() {
             var parametros = {};
             if(vm.fechaFin == undefined || vm.fechaInicio == undefined){
@@ -127,8 +129,7 @@ angular.module('softvFrostApp')
 
             });
         }
-
-
+///valida las fechas y depende a las validaciones las asigna con un formato definido 
         function getFechas() {
             if (vm.fechaInicio == null) {
                 fechaInicioYMD = null;
@@ -152,6 +153,7 @@ angular.module('softvFrostApp')
         }
 
         vm.clearInicio = clearInicio;
+        ///limpia la fecha de inicio 
         function clearInicio() {
             fechaInicioYMD = null;
             vm.fechaInicio = fechaInicioYMD;
@@ -159,6 +161,7 @@ angular.module('softvFrostApp')
         }
 
         vm.clearFin = clearFin;
+        ///limpia la fecha de fin 
         function clearFin() {
             vm.fechaFin = null;
             fechaFinYMD = null;
@@ -171,6 +174,7 @@ angular.module('softvFrostApp')
 
         // CREAR CSV 
         vm.crearVisibleAsCsv = crearVisibleAsCsv;
+        ///Crea csv
         function crearVisibleAsCsv() {
             $timeout(function () {
 
@@ -194,6 +198,7 @@ angular.module('softvFrostApp')
 
         // CREAR CSV 
         vm.crearTodoAsCsv = crearTodoAsCsv;
+        ///crea csv
         function crearTodoAsCsv() {
             $timeout(function () {
 
@@ -216,7 +221,7 @@ angular.module('softvFrostApp')
 
 
 
-
+///Define los encabezados 
         function initArray() {
             vm.arrayReporte = [];          // ENCABEZADOS
             vm.arrayReporte = [{
@@ -239,6 +244,7 @@ angular.module('softvFrostApp')
 
         // Create TABLE PDF
         vm.createPdfTodo = createPdfTodo;
+///Crea la tabla que contendra el pdf 
         function createPdfTodo(pdfAcrear) {
 
             var rows = [[0, 0, 0, 0, 0, 0,]];

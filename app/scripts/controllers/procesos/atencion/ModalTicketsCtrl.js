@@ -2,14 +2,14 @@
 angular
 	.module('softvFrostApp')
 	.controller('ModalTicketsCtrl', function($uibModal, $uibModalInstance, cajasFactory, contrato) {
-
+//////funcion de inicializacion del controlador, obtiene un listado del historial de las facturas 
 		function initialData() {
 			cajasFactory.dameHistorialServicios(contrato).then(function(data) {
 				vm.tickets = data.GetBuscaFacturasHistorialListResult;
 				console.log(vm.tickets);
 			});
 		}
-
+///llama a otra vista con otro control 
 		function dameFactura(factura) {
 			var modalInstance = $uibModal.open({
 				animation: true,
@@ -31,7 +31,7 @@ angular
 				}
 			});
 		}
-
+///llama a la vista modalSingleNota.html con otro controlador 
 		function dameNota(factura) {
 			var modalInstance = $uibModal.open({
 				animation: true,
@@ -50,7 +50,7 @@ angular
 				}
 			});
 		}
-
+///Se puede usar para descartar un modal
 		function cancel() {
 			$uibModalInstance.dismiss('cancel');
 		}

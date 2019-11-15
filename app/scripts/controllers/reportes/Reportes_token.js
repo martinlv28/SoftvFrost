@@ -19,25 +19,27 @@ angular.module('softvFrostApp')
     var img = new Image();
     img.crossOrigin = "";  
 
-
+///funcion de inicializacion del controlador, llama a dos funciones 
     this.$onInit = function() {
         getImageDataURL();
         getReporteTokens();   
 
     }
+    ///Actualiza 
 
     function reloadRoute() {
         $state.reload(); 
     };
 
     vm.limpiarFiltros = limpiarFiltros;
+    ///Limpia las fehcas y llama a la funcion reloadRoute
     function limpiarFiltros(){
         vm.fechaInicio = null;
         vm.fechaFin = null;
         reloadRoute();
     }
 
-
+///obtiene la imagen en un url
     function getImageDataURL() 
     {             
       
@@ -66,6 +68,7 @@ angular.module('softvFrostApp')
 
     var arrayTokens = [];   
     vm.getReporteTokens = getReporteTokens;
+    ///valida las fechas, donde si estan bien llama a mostrarReporteTokens
     function getReporteTokens()
     {                     
         getFechas();  
@@ -86,7 +89,7 @@ angular.module('softvFrostApp')
         }  
     }
 
-
+///valida las fechas y depende a las validaciones las asigna con un formato definido 
     function getFechas(){
         if ( vm.fechaInicio == null ){
                 fechaInicioYMD = null;
@@ -110,6 +113,7 @@ angular.module('softvFrostApp')
     }
 
     vm.clearInicio = clearInicio;
+    ///limpia la deha de inicio 
     function clearInicio(){
         fechaInicioYMD = null;
         vm.fechaInicio = fechaInicioYMD;        
@@ -117,6 +121,7 @@ angular.module('softvFrostApp')
     }
 
     vm.clearFin = clearFin;
+    ///limpia la fecha de fin      
     function clearFin(){
         vm.fechaFin = null;
         fechaFinYMD = null; 
@@ -129,6 +134,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV 
     vm.crearVisibleAsCsv = crearVisibleAsCsv;
+    ///crea csv
     function crearVisibleAsCsv() {
         $timeout(function() {
 
@@ -154,6 +160,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV 
     vm.crearTodoAsCsv = crearTodoAsCsv;
+    ///crea csv
     function crearTodoAsCsv() {
       $timeout(function() {
 
@@ -176,7 +183,7 @@ angular.module('softvFrostApp')
       });
     };
 
-
+///Listado de los encabezados de la tabla
     function initArray (){
       vm.arrayReporte = [];  
          // ENCABEZADOS
@@ -199,6 +206,7 @@ angular.module('softvFrostApp')
 
 // Create TABLE PDF 
 vm.createPdfTodo = createPdfTodo;
+///crea la tabla que tendra el pdf 
 function createPdfTodo(pdfAcrear){
 
     var rows = [ [0,0,0,0,0,0,0,0,0,0,0,0] ]; 

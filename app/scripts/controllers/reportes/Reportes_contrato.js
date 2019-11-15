@@ -14,18 +14,18 @@ angular.module('softvFrostApp')
     vm.csvDosHide = true; 
     var img = new Image();
     img.crossOrigin = "";  
-
+///funcion de inicializacion del controlador, llama a dos funciones 
     this.$onInit = function() {
 
         getImageDataURL();
         getReporteContrato();  
 
     }
-
+///actualiza 
     function reloadRoute() {
         $state.reload(); 
     };
-
+///limpia las fechas de inicio y din y llama a la funcion reloadRoute
 
     vm.limpiarFiltros = limpiarFiltros;
     function limpiarFiltros(){
@@ -34,7 +34,7 @@ angular.module('softvFrostApp')
         reloadRoute();
     }
     
-
+///obtiene la imagen en un url
     function getImageDataURL() 
     {            
        
@@ -60,6 +60,7 @@ angular.module('softvFrostApp')
 
     var arrayContrato = [];   
     vm.getReporteContrato = getReporteContrato;
+    ///trae el reporte del contrato 
     function getReporteContrato()
     {                   
         reportesFactory.mostrarReporteContrato(idAux).then(function(data) {
@@ -76,6 +77,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV 
     vm.crearVisibleAsCsv = crearVisibleAsCsv;
+    ///borra y pone la coleccion 
     function crearVisibleAsCsv() {
         $timeout(function() {
 
@@ -101,6 +103,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV 
     vm.crearTodoAsCsv = crearTodoAsCsv;
+    ///CREAR CSV 
     function crearTodoAsCsv() {
       $timeout(function() {
 
@@ -125,7 +128,7 @@ angular.module('softvFrostApp')
 
 
 
-
+///los encabezados 
     function initArray (){
         vm.arrayReporte = [];          // ENCABEZADOS
         vm.arrayReporte =     [{
@@ -142,6 +145,7 @@ angular.module('softvFrostApp')
 
     // Create TABLE PDF
     vm.createPdfTodo = createPdfTodo;
+    ///crea la tabla que tendra el reporte 
     function createPdfTodo(pdfAcrear){
 
     var rows = [ [0,0,0,0,0,0,0] ]; 

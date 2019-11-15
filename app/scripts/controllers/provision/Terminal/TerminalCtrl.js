@@ -2,6 +2,7 @@
 angular.module('softvFrostApp').controller('TerminalCtrl', TerminalCtrl);
 
 function TerminalCtrl(terminalFactory, $uibModal, $state, SuscriptorFactory, mapaBeamFactory, nuevoSuscriptorFactory, $stateParams) {
+  ///funcion de inicializacion del controlador, obtiene las terminales, los servicios y la lista de beam
   this.$onInit = function () {
     if ($stateParams.idSuscriptor != undefined) {
       vm.idSuscriptor = $stateParams.idSuscriptor;
@@ -41,7 +42,7 @@ function TerminalCtrl(terminalFactory, $uibModal, $state, SuscriptorFactory, map
     }
 
   }
-
+///manda a otra vista ModalGestionTerminal.html
   function GestionTerminal(object) {
     var modalInstance = $uibModal.open({
       animation: true,
@@ -61,13 +62,13 @@ function TerminalCtrl(terminalFactory, $uibModal, $state, SuscriptorFactory, map
     });
 
   }
-
+///nos manda al estado indicado 
   function EditarTerminal(obj) {
     $state.go('home.provision.terminalesEdita', {
       'Id': obj.SAN
     });
   }
-
+///cambia valores para el filtro de busqueda 
   function busquedaCambio(x) {
     vm.tipoBusqueda = 0;
     if (x == 1) {
@@ -120,7 +121,7 @@ function TerminalCtrl(terminalFactory, $uibModal, $state, SuscriptorFactory, map
 
     }
   }
-
+///revisa el tipo de busqueda y depende de su estdo trae la lista de datos con los filtros aplicados 
   function buscar() {
     if (vm.tipoBusqueda == 1) {
       vm.obj = {
@@ -223,7 +224,7 @@ function TerminalCtrl(terminalFactory, $uibModal, $state, SuscriptorFactory, map
       });
     }
   }
-
+///manda a otra ventana MovimientosTerminales.html
   function verMovimientos(item) {
     var modalInstance = $uibModal.open({
       animation: true,
@@ -242,7 +243,7 @@ function TerminalCtrl(terminalFactory, $uibModal, $state, SuscriptorFactory, map
       }
     });
   }
-
+///manda a otra ventana ModalHistoricosTerminales.html
   function verHistoricos(item) {
     var modalInstance = $uibModal.open({
       animation: true,

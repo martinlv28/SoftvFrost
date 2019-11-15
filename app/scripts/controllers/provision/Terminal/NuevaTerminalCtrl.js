@@ -34,7 +34,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 		'Nombre': 'Incompleta'
 	}
 	];
-
+///funcion de inicializacion del controlador,coloca los datos del suscriptor 
 	this.$onInit = function () {
 		if ($stateParams.idSuscriptor != undefined) {
 			var busObj = {
@@ -68,7 +68,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 			vm.Servicios = dataServicios.GetServicioListByProgramCodeResult;
 		});*/
 	}
-
+///nos manda a la vista ModalBusquedaSuscriptor.html
 	function BuscaSuscriptor() {
 		var modalInstance = $uibModal.open({
 			animation: true,
@@ -82,7 +82,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 			size: 'lg'
 		});
 	}
-
+///valida si el servicio se encuetra dentro de las coordenadas 
 	function ValidarServicio() {
 		if((vm.Latitud != '' && vm.Longitud != '') && (vm.Latitud != null && vm.Latitud != null))
 		{
@@ -138,7 +138,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 			ngNotify.set('Es necesario capturar las coordenadas para validar el servicio','info');
 		}
 	}
-
+///revisa el elemento Empresarial y si es true obtiene los pools del servicio Beam
 	function ObtieneSubredes(){
 		if (vm.Empresarial === true)
 		{
@@ -150,7 +150,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 			});
 		}
 	}
-
+///añade ceros a la izquierda 
 	function hughesGetSanCompuesto(obj) {
 		var a = obj.toString();
 		var i;
@@ -161,7 +161,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 		return globalService.getType() + a;
 
 	};
-
+///manda a otra vista ModalGetLatLong.html
 	function BuscaLatLong() {
 		var obj = {
 			lat: 23.96617587126503,
@@ -215,7 +215,7 @@ function NuevaTerminalCtrl(terminalFactory, SuscriptorFactory, $uibModal, $rootS
 		vm.Latitud = detalle[0];
 		vm.Longuitud = detalle[1];
 	});
-
+///valida que este definido el suscriptor, 
 	function GuardaTerminal() {
 		if (vm.IdSuscriptor == null || vm.IdSuscriptor == undefined) {
 			ngNotify.set('No se ha definido un suscriptor para la terminal', 'error');

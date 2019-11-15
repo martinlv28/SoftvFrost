@@ -3,7 +3,7 @@ angular
   .module('softvFrostApp')
   .controller('ModalDescargaMaterialCtrl', function ($uibModalInstance, $uibModal, options, DescargarMaterialFactory, $rootScope, ngNotify, $localStorage, $state) {
 
-
+//////funcion de inicializacion del controlador, obtiene los datos y revisa si tiene bitacora 
     function initialData(objDesMat) {
       vm.articulos_ = [];
       DescargarMaterialFactory.GetMuestra_Detalle_Bitacora(objDesMat.SctTecnico.CLV_TECNICO, vm.IAlma).then(function (data) {
@@ -46,7 +46,7 @@ angular
 
       });
     }
-
+///ontiene informacion del articulo mientras haya, cambia propiedades de elementos de la vista 
     function BuscarNombreArticulo() {
       if (vm.SlctMaterial.catTipoArticuloClave > 0) {
         DescargarMaterialFactory.GetMuestra_Descripcion_Articulo_2List(options.SctTecnico.CLV_TECNICO, vm.SlctMaterial.catTipoArticuloClave, vm.IAlma).then(function (data) {
@@ -62,7 +62,7 @@ angular
 
       }
     }
-
+///obtiene el tipo de material y depende de el resultado si cambia propiedades de elementos de la vista 
     function BuscarTipoArticulo() {
       DescargarMaterialFactory.GetSoftv_ObtenTipoMaterial(catUnidadClave, Tipo, Articulo, vm.SlctArticulo.IdArticulo).then(function (data) {
         vm.TipoArticulo = data.GetSoftv_ObtenTipoMaterialResult.Tipo;
@@ -99,7 +99,7 @@ angular
         vm.MetrajeFE = "";
       });
     }
-
+///obtiene informacion del articulo y verifica si puede agregar o modificar la cantidad del articulo 
     function AgregarArticulo() {
       if (vm.SlctArticulo != undefined && vm.SlctArticulo.IdArticulo > 0) {
         DescargarMaterialFactory.GetSoftv_ExistenciasTecnico(vm.SlctArticulo.IdArticulo, options.SctTecnico.CLV_TECNICO, vm.IAlma).then(function (data) {
@@ -215,7 +215,7 @@ angular
         ngNotify.set('Selecciona un artículo.', 'error');
       }
     }
-
+///valida que se pueda agregar la bitacora sin problemas 
     function ok() {
       if (vm.articulos_.length > 0) {
         var ObjDescargaMat = {};
@@ -238,7 +238,7 @@ angular
       }
 
     }
-
+///busca el numero del articulo y cuando lo encuentra lo elimina de la lista 
     function EliminarArticulo(clave) {
       for (var i = 0; i < vm.articulos_.length; i++)
         if (vm.articulos_[i].NoArticulo === clave) {
@@ -259,7 +259,7 @@ angular
       });
     }
 
-
+///recorre la lista en busca de si hay al menos uno y manda cierto o falso depende cual sea el caso 
     function ExisteArticulo(IdInventario) {
       var count = 0;
       for (var a = 0; a < vm.articulos_.length; a++) {
@@ -269,10 +269,11 @@ angular
       }
       return (count > 0) ? true : false;
     }
+    //////Se puede usar para descartar un modal
     function cancel() {
       $uibModalInstance.dismiss('cancel');
     }
-
+///depende del tipo de metraje, puede cambiar propiedades de elementos de la ventana 
     function SlctTipoMetraje(){
       if(vm.TipoMetraje == 'I'){
         vm.MostrarMFE = false;

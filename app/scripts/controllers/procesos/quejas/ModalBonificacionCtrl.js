@@ -2,7 +2,7 @@
 angular
 	.module('softvFrostApp')
 	.controller('ModalBonificacionCtrl', function($uibModalInstance, $uibModal, $rootScope, ngNotify, $localStorage, $state, detalle, quejasFactory) {
-
+///funcion de inicializacion del controlador, obtiene los datos de las notificaciones 
 		function initialData() {	
 		  alert(detalle.Block);
           vm.bloquear=detalle.Block;
@@ -30,7 +30,7 @@ angular
 
 
 
-
+///hace una validacion y despende de el resultado si asigna un valor espesifico a una variable, despues inserta la bonificacion y manda mensaje si se inserto correctamente o no 
 		function ok() {
 			if (vm.Tipo == 'M'){
 				BndPorMonto = 1;
@@ -47,15 +47,15 @@ angular
 				}
 			});
 		}
-
+///Se puede usar para descartar un modal
 		function Eliminar() {
 			$uibModalInstance.dismiss('cancel');
 		}
-
+///Se puede usar para descartar un modal
 		function cancel() {
 			$uibModalInstance.dismiss('cancel');
 		}
-
+///en base a una validacion cambia propiedades de elementos de la vista 
 		function CambioTipo() {
 			if (vm.Tipo == 'D') {
 				vm.ShowConceptosDia = true;
@@ -65,7 +65,7 @@ angular
 				vm.ShowConceptosMonto = true;
 			}
 		}
-
+///llama a EliminaBonificacion donde elimina labonificacion, lanza una mensaje donde dice si lo hizo o no 
 		function eliminarBonificacion() {
 
 			quejasFactory.EliminaBonificacion(detalle.Queja).then(function(data) {			

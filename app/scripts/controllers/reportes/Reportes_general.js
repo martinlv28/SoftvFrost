@@ -15,24 +15,24 @@ angular.module('softvFrostApp')
     var img = new Image();
     img.crossOrigin = "";  
 
-
+///funcion de inicializacion del controlador, llama a otras dos funciones 
     this.$onInit = function() {
 
         getImageDataURL();
         getReporteConsumo();  
     }
-
+///actualiza 
     function reloadRoute() {
         $state.reload(); 
     };
 
-
+///asigna nulo a la fecha de inicio y llama a la funcion reloadRoute
     vm.limpiarFiltros = limpiarFiltros;
     function limpiarFiltros(){
         vm.fechaInicio = null;
         reloadRoute();
     }
-
+///obtiene la imagen en un url
     function getImageDataURL() 
     {             
       
@@ -59,6 +59,7 @@ angular.module('softvFrostApp')
 
     var arrayTokens = [];   
     vm.getReporteConsumo = getReporteConsumo;
+    ///valida la fecha de inicio, llama a mostrarReporteConsumo y asigna valores
     function getReporteConsumo()
     {                     
             getFechas();        
@@ -77,7 +78,7 @@ angular.module('softvFrostApp')
             });
     }
 
-
+///obtiene la fecha en un formato espesifico 
     function getFechas(){
         if ( vm.fechaInicio == null ){
                 fechaInicioYMD = null;
@@ -99,6 +100,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV
     vm.crearVisibleAsCsv = crearVisibleAsCsv;
+    /// Crea el csv
     function crearVisibleAsCsv() {
         $timeout(function() {
 
@@ -124,6 +126,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV
     vm.crearTodoAsCsv = crearTodoAsCsv;
+    ///Crea csv
     function crearTodoAsCsv() {
       $timeout(function() {
 
@@ -150,7 +153,7 @@ angular.module('softvFrostApp')
     vm.order = [ 'SAN', 'ESN', 'PlanDeServicio', 'Beam', 'VelocidadBajada', 'VelocidadSubida', 'Suscriptor', 'Referencia', 'Estatus',
                  'Latitud', 'Longitud','IpNateada','Fap','FechaJovian','Estado','Municipio','Direccion'];
 
-
+///Los encabezados 
     function initArray (){
       vm.arrayReporte = []; 
          
@@ -177,6 +180,7 @@ angular.module('softvFrostApp')
 
 // Create TABLE PDF  
 vm.createPdfTodo = createPdfTodo;
+///Crea la tabla para el pdf 
 function createPdfTodo(pdfAcrear){
 
     var rows = [ [0] ];

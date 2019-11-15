@@ -1,5 +1,6 @@
 'use strict';
 angular.module('softvFrostApp').controller('EditarSuscriptorCtrl', function(nuevoSuscriptorFactory, ngNotify, $state, $stateParams) {
+	///funcion de inicializacion del controlador,obtiene la informacion del un suscriptor
 	this.$onInit = function() {
 		nuevoSuscriptorFactory.getSuscriptor($stateParams.id).then(function(data) {
 			vm.suscriptor = data.GetSuscriptorResult;
@@ -17,7 +18,7 @@ angular.module('softvFrostApp').controller('EditarSuscriptorCtrl', function(nuev
 			}
 		});
 	}
-
+///actualiza los datos del suscriptor 
 	function guardar() {
 		var sus = {
 			id: vm.suscriptor.IdSuscriptor,

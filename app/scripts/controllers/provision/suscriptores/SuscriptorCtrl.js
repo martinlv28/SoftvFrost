@@ -1,14 +1,14 @@
 'use strict';
 
 function SuscriptorCtrl(SuscriptorFactory, $uibModal, $state, $localStorage) {
-
+///funcion de inicializacion del controlador,obtiene un listado de todos los suscriptores 
   this.$onInit = function () {
     SuscriptorFactory.getSuscriptorList().then(function (data) {
      
       vm.suscriptores = data.GetSuscriptorListResult;
     });
   }
-
+///llama a otra vista con su controlador 
   function DetalleSuscriptor(object) {
     vm.animationsEnabled = true;
     var modalInstance = $uibModal.open({
@@ -28,7 +28,7 @@ function SuscriptorCtrl(SuscriptorFactory, $uibModal, $state, $localStorage) {
       }
     });
   }
-
+///nos envia a suscriptoresEditar con un parametro espesifico
   function editarSuscriptor(item) {
     $state.go('home.provision.suscriptoresEditar', {
       params: {
@@ -36,7 +36,7 @@ function SuscriptorCtrl(SuscriptorFactory, $uibModal, $state, $localStorage) {
       }
     });
   }
-
+///cambia variables y propiedades de elementos de la vista para el tipo de dato de busqueda 
   function cambiarBusqueda(id) {
     vm.tipoBusqueda = 0;
     if (id == 1) {
@@ -80,7 +80,7 @@ function SuscriptorCtrl(SuscriptorFactory, $uibModal, $state, $localStorage) {
       vm.tipoBusqueda = 0;
     }
   }
-
+///cambia los objetos de busqueda y depende de validaciones trae la lista con los filtros de busqueda aplicados 
   function buscar() {
 
     if (vm.tipoBusqueda == 1) {

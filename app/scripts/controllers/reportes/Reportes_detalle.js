@@ -13,7 +13,7 @@ angular.module('softvFrostApp')
     vm.divExportar = true; 
     var img = new Image();
     img.crossOrigin = "";  
-
+///funcion de inicializacion del controlador,llama a varias funciones 
     this.$onInit = function() {
 
         getImageDataURL();
@@ -23,11 +23,11 @@ angular.module('softvFrostApp')
         getEstado();  
     }
 
-
+///actualiza 
     function reloadRoute() {
         $state.reload(); 
     };
-  
+  ///obtiene el listado de beams 
     function getBeam() { 
         reportesFactory.mostrarBeam().then(function(data) {   
             vm.listaBeam = [{"BeamId":"Todos"}];
@@ -40,6 +40,7 @@ angular.module('softvFrostApp')
     }
 
     vm.getPlan = getPlan; 
+    ///obtiene el listado de planes
     function getPlan() 
     {            
         reportesFactory.mostrarPlan().then(function(data) {    
@@ -52,7 +53,7 @@ angular.module('softvFrostApp')
         });
 
     }
-
+///delclaracion de el id de los estados 
     function getEstado() {
             vm.listaEstado = [{"IdEstado":0, "Nombre":"Todos"},{"IdEstado": 1, "Nombre":"Activa"}, {"IdEstado": 2, "Nombre":"Cancelada"},
             {"IdEstado": 3, "Nombre":"Incompleta"},{"IdEstado": 4, "Nombre":"Pendiente"},{"IdEstado": 5, "Nombre":"Suspendida"} ];
@@ -63,6 +64,7 @@ angular.module('softvFrostApp')
 
     var arrayDetalle = [];
     vm.getReporteDetalleT = getReporteDetalleT; 
+    ///hace validaciones donde depende de ellas cambia valores, despues llama a mostrarReporteDetTerminales
     function getReporteDetalleT() 
         {                   
             vm.divExportar = false;          
@@ -110,6 +112,7 @@ angular.module('softvFrostApp')
         }
 
     vm.limpiarFiltros = limpiarFiltros;
+    ///reestablece elementos de la vista y llama a la funcion reloadRoute
     function limpiarFiltros(){
       
         vm.san_input = null;
@@ -124,7 +127,7 @@ angular.module('softvFrostApp')
 
 
     }
-    
+    //////obtiene la imagen en un url
     function getImageDataURL() 
     {             
     
@@ -155,6 +158,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV 
     vm.crearVisibleAsCsv = crearVisibleAsCsv;
+    ///CREAR CSV 
     function crearVisibleAsCsv() {
 
         $timeout(function() {
@@ -181,6 +185,7 @@ angular.module('softvFrostApp')
 
     // CREAR CSV 
     vm.crearTodoAsCsv = crearTodoAsCsv;
+    ///CREAR CSV 
     function crearTodoAsCsv() {
       $timeout(function() {
 
@@ -203,7 +208,7 @@ angular.module('softvFrostApp')
       });
     };
 
-
+///los encabezados que llevara el reporte 
     function initArray (){
       vm.arrayReporte = []; 
          // ENCABEZADOS
@@ -231,6 +236,7 @@ angular.module('softvFrostApp')
 
 // Create TABLE PDF 
 vm.createPdfTodo = createPdfTodo;
+///Crea la tabla que llevara el reporte 
 function createPdfTodo(pdfAcrear){
   
 
